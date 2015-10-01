@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Retourne les visiteurs
+ 
+ * @param $pdo
+ * @return un tableau de visiteurs
+*/
 function getLesVisiteurs($pdo)
 {
 		$req = "select * from Visiteur";
@@ -7,6 +13,13 @@ function getLesVisiteurs($pdo)
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
 }
+
+/**
+ * Retourne les fiches de frais
+ 
+ * @param $pdo
+ * @return un tableau des fiches de frais
+*/
 function getLesFichesFrais($pdo)
 {
 		$req = "select * from FicheFrais";
@@ -14,6 +27,12 @@ function getLesFichesFrais($pdo)
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
 }
+/**
+ * Retourne les id des frais de forfait dans l'ordre croissant
+ 
+ * @param $pdo
+ * @return un tableau des id des frais de forfait dans l'ordre croissant
+*/
 function getLesIdFraisForfait($pdo)
 {
 		$req = "select FraisForfait.id as id from FraisForfait order by FraisForfait.id";

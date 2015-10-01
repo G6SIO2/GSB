@@ -146,6 +146,12 @@ function creationFraisForfait($pdo)
 	}
 
 }
+
+/**
+ * Retourne un tableau de frais hors forfait pour la création de frais hors forfait en base de données.
+
+ * @return un tableau de frais hors forfait
+*/
 function getDesFraisHorsForfait()
 {
 	$tab = array(
@@ -250,6 +256,13 @@ function creationFraisHorsForfait($pdo)
 		}
 	}
 }
+/**
+ * Retourne une chaîne de caractères correspondant à une année et un mois sous la forme "aaaamm".
+ * Le jour, le mois et l'année sont décomposés grâce au slash.
+ 
+ * @param $date
+ * @return un tableau des id des frais de forfait dans l'ordre croissant
+*/
 function getMois($date){
 		@list($jour,$mois,$annee) = explode('/',$date);
 		if(strlen($mois) == 1){

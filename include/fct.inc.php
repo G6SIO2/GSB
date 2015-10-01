@@ -87,6 +87,11 @@ function getMoisPrecedent($mois){
 			$numMois="0".$numMois;
 		return $numAnnee.$numMois;
 }
+/**
+ * Génère pour chaque client une fiche de frais
+ * avec un état en fonction des mois
+ * @param type $pdo
+ */
 function creationFichesFrais($pdo)
 {
 	$lesVisiteurs = getLesVisiteurs($pdo);
@@ -130,6 +135,11 @@ function creationFichesFrais($pdo)
 		}
 	}
 }
+
+/**
+ * 
+ * @param type $pdo
+ */
 function creationFraisForfait($pdo)
 {
 	$lesFichesFrais= getLesFichesFrais($pdo);
@@ -156,12 +166,11 @@ function creationFraisForfait($pdo)
 	}
 
 }
-
 /**
- * Retourne un tableau de frais hors forfait pour la création de frais hors forfait en base de données.
-
- * @return un tableau de frais hors forfait
-*/
+ * Retourne l'ensemble des frais hors forfait
+ * existants
+ * @return array
+ */
 function getDesFraisHorsForfait()
 {
 	$tab = array(
@@ -212,6 +221,13 @@ function getDesFraisHorsForfait()
 		);
 	return $tab;
 }
+
+/**
+ * Permet de mettre à jour le mot de passe
+ * des visiteurs en mettant un "grain de sel" (5 lettres)
+ * dans le mot de passe
+ * @param type $pdo
+ */
 function updateMdpVisiteur($pdo)
 {
 	$req = "select * from Visiteur";

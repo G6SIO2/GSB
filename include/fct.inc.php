@@ -40,6 +40,16 @@ function getLesIdFraisForfait($pdo)
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
 }
+
+/* gestion des erreurs*/
+/**
+ * Indique si une valeur est un entier positif ou nul
+ 
+ * @param $pdo
+ * @param $idVisiteur
+ * @return Le dernier mois
+*/
+
 function getDernierMois($pdo, $idVisiteur)
 {
 		$req = "select max(mois) as dernierMois from FicheFrais where idVisiteur = '$idVisiteur'";

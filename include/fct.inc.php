@@ -27,6 +27,7 @@ function getLesFichesFrais($pdo)
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
 }
+
 /**
  * Retourne les id des frais de forfait dans l'ordre croissant
  
@@ -43,13 +44,12 @@ function getLesIdFraisForfait($pdo)
 
 /* gestion des erreurs*/
 /**
- * Indique si une valeur est un entier positif ou nul
+ * Renvoie le dernier mois sous la forme 'AAAAMM' des fiches de frais créées pour un visiteur
  
  * @param $pdo
  * @param $idVisiteur
- * @return Le dernier mois
+ * @return Le dernier mois sous la forme 'AAAAMM'
 */
-
 function getDernierMois($pdo, $idVisiteur)
 {
 		$req = "select max(mois) as dernierMois from FicheFrais where idVisiteur = '$idVisiteur'";
@@ -58,6 +58,13 @@ function getDernierMois($pdo, $idVisiteur)
 		return $laLigne['dernierMois'];
 
 }
+
+/**
+ * Renvoie le mois suivant le mois passé en paramètre sous la forme 'AAAAMM'
+ 
+ * @param $mois
+ * @return Le mois suivant le mois passé en paramètre sous la forme 'AAAAMM'
+*/
 function getMoisSuivant($mois){
 		$numAnnee =substr( $mois,0,4);
 		$numMois =substr( $mois,4,2);
@@ -73,6 +80,13 @@ function getMoisSuivant($mois){
 			$numMois="0".$numMois;
 		return $numAnnee.$numMois;
 }
+
+/**
+ * Renvoie le mois précédent le mois passé en paramètre sous la forme 'AAAAMM'
+ 
+ * @param $mois
+ * @return Le mois précédent le mois passé en paramètre sous la forme 'AAAAMM'
+*/
 function getMoisPrecedent($mois){
 		$numAnnee =substr( $mois,0,4);
 		$numMois =substr( $mois,4,2);
@@ -87,9 +101,11 @@ function getMoisPrecedent($mois){
 			$numMois="0".$numMois;
 		return $numAnnee.$numMois;
 }
+
 /**
- * Génère pour chaque client une fiche de frais
- * avec un état en fonction des mois
+ * Génère pour chaque visiteur une fiche de frais du mois actuel, du mois précédent et du mois suivant 
+ * avec un état différent en fonction du mois
+ 
  * @param type $pdo
  */
 function creationFichesFrais($pdo)
@@ -137,7 +153,11 @@ function creationFichesFrais($pdo)
 }
 
 /**
- * 
+ * Génère aléatoirement des lignes de frais de forfait pour chaque fiche de frais. 
+ * La quantité du frais dépend de l'id :
+ * - S'il commence par la lettre K, la quantité sera entre 300 et 1000
+ * - Sinon, la quantité sera entre 2 et 20
+ 
  * @param type $pdo
  */
 function creationFraisForfait($pdo)
@@ -166,10 +186,11 @@ function creationFraisForfait($pdo)
 	}
 
 }
+
 /**
- * Retourne l'ensemble des frais hors forfait
- * existants
- * @return array
+ * Retourne un tableau de frais hors forfait qui peuvent être utilisés pour être insérés en base de données
+ 
+ * @return Un tableau de frais hors forfait
  */
 function getDesFraisHorsForfait()
 {
@@ -182,7 +203,7 @@ function getDesFraisHorsForfait()
 				      "lib" => "achat de matériel de papèterie",
 					  "min" => 10,
 					  "max" => 50 ),
-				3	=> array(
+				3 => array(
 				      "lib" => "taxi",
 					  "min" => 20,
 					  "max" => 80 ),
@@ -223,9 +244,9 @@ function getDesFraisHorsForfait()
 }
 
 /**
- * Permet de mettre à jour le mot de passe
- * des visiteurs en mettant un "grain de sel" (5 lettres)
- * dans le mot de passe
+ * Permet de réatribuer un mot de passe composé de 5 caractères (lettres minuscules et chiffres) généré aléatoirement
+ * pour chaque visiteur
+ 
  * @param type $pdo
  */
 function updateMdpVisiteur($pdo)
@@ -247,9 +268,14 @@ function updateMdpVisiteur($pdo)
 			$req = "update Visiteur set mdp ='$mdp' where Visiteur.id ='$id' ";
 			$pdo->exec($req);
 		}
-
-
 }
+
+/**
+ * Génère des lignes de frais hors forfait aléatoirement pour chaque fiche de frais et à partir d'une liste de
+ * frais hors forfait prédéfinie.
+ 
+ * @param type $pdo
+ */
 function creationFraisHorsForfait($pdo)
 {
 	$desFrais = getDesFraisHorsForfait();
@@ -282,12 +308,13 @@ function creationFraisHorsForfait($pdo)
 		}
 	}
 }
+
 /**
- * Retourne une chaîne de caractères correspondant à une année et un mois sous la forme "aaaamm".
+ * Retourne une chaîne de caractères correspondant à une année et un mois sous la forme "AAAAMM" créée à partir de la date passée en paramètre.
  * Le jour, le mois et l'année sont décomposés grâce au slash.
  
  * @param $date
- * @return un tableau des id des frais de forfait dans l'ordre croissant
+ * @return Une chaîne de caractères correspondant à une année et un mois sous la forme "AAAAMM"
 */
 function getMois($date){
 		@list($jour,$mois,$annee) = explode('/',$date);
@@ -296,6 +323,12 @@ function getMois($date){
 		}
 		return $annee.$mois;
 }
+
+/**
+ * Met à jour le montant validé de chaque fiche de frais en additionnant leurs totaux de frais de forfait et de frais hors forfait
+ 
+ * @param type $pdo
+ */
 function majFicheFrais($pdo)
 {
 	

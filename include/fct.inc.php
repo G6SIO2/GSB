@@ -4,7 +4,7 @@
  * Retourne les visiteurs
  
  * @param $pdo
- * @return un tableau de visiteurs
+ * @return Array Un tableau de visiteurs
 */
 function getLesVisiteurs($pdo)
 {
@@ -18,7 +18,7 @@ function getLesVisiteurs($pdo)
  * Retourne les fiches de frais
  
  * @param $pdo
- * @return un tableau des fiches de frais
+ * @return Array Un tableau des fiches de frais
 */
 function getLesFichesFrais($pdo)
 {
@@ -32,7 +32,7 @@ function getLesFichesFrais($pdo)
  * Retourne les id des frais de forfait dans l'ordre croissant
  
  * @param $pdo
- * @return un tableau des id des frais de forfait dans l'ordre croissant
+ * @return Array Un tableau des id des frais de forfait dans l'ordre croissant
 */
 function getLesIdFraisForfait($pdo)
 {
@@ -48,7 +48,7 @@ function getLesIdFraisForfait($pdo)
  
  * @param $pdo
  * @param $idVisiteur
- * @return Le dernier mois sous la forme 'AAAAMM'
+ * @return Mixed Le dernier mois sous la forme 'AAAAMM'
 */
 function getDernierMois($pdo, $idVisiteur)
 {
@@ -63,7 +63,7 @@ function getDernierMois($pdo, $idVisiteur)
  * Renvoie le mois suivant le mois passé en paramètre sous la forme 'AAAAMM'
  
  * @param $mois
- * @return Le mois suivant le mois passé en paramètre sous la forme 'AAAAMM'
+ * @return Mixed Le mois suivant le mois passé en paramètre sous la forme 'AAAAMM'
 */
 function getMoisSuivant($mois){
 		$numAnnee =substr( $mois,0,4);
@@ -85,7 +85,7 @@ function getMoisSuivant($mois){
  * Renvoie le mois précédent le mois passé en paramètre sous la forme 'AAAAMM'
  
  * @param $mois
- * @return Le mois précédent le mois passé en paramètre sous la forme 'AAAAMM'
+ * @return Mixed Le mois précédent le mois passé en paramètre sous la forme 'AAAAMM'
 */
 function getMoisPrecedent($mois){
 		$numAnnee =substr( $mois,0,4);
@@ -190,7 +190,7 @@ function creationFraisForfait($pdo)
 /**
  * Retourne un tableau de frais hors forfait qui peuvent être utilisés pour être insérés en base de données
  
- * @return Un tableau de frais hors forfait
+ * @return Array Un tableau de frais hors forfait
  */
 function getDesFraisHorsForfait()
 {
@@ -314,7 +314,7 @@ function creationFraisHorsForfait($pdo)
  * Le jour, le mois et l'année sont décomposés grâce au slash.
  
  * @param $date
- * @return Une chaîne de caractères correspondant à une année et un mois sous la forme "AAAAMM"
+ * @return Mixed Une chaîne de caractères correspondant à une année et un mois sous la forme "AAAAMM"
 */
 function getMois($date){
 		@list($jour,$mois,$annee) = explode('/',$date);

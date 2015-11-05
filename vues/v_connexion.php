@@ -9,7 +9,7 @@
             <input id="login" type="text" name="login"  size="30" maxlength="45">
         </p>
         <p>
-            <label for="mdp">Mot de passe*</label>
+            <label for="login">Mot de passe*</label>
             <input id="mdp"  type="password"  name="mdp" size="30" maxlength="45">
         </p>
         <input type="submit" value="Valider" name="valider">

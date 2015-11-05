@@ -1,4 +1,4 @@
-﻿
+
 <table class="listeLegere">
   	   <caption>Descriptif des éléments hors forfait
        </caption>
@@ -56,8 +56,8 @@
         <input id="effacer" type="reset" value="Effacer" size="20" />
       </p> 
       </div>
-        
+      
       </form>
-  </div>
+  </section>
   
 

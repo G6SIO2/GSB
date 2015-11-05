@@ -1,5 +1,5 @@
-﻿<!DOCTYPE html>
-<html xml:lang="fr" lang="fr">
+<!DOCTYPE html>
+<html lang="fr">
   <head>
     <title>Intranet du Laboratoire Galaxy-Swiss Bourdin</title>
     <meta charset="utf-8"/>

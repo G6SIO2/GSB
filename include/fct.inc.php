@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Retourne les visiteurs
  
@@ -13,7 +12,6 @@ function getLesVisiteurs($pdo)
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
 }
-
 /**
  * Retourne les fiches de frais
  
@@ -27,7 +25,6 @@ function getLesFichesFrais($pdo)
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
 }
-
 /**
  * Retourne les id des frais de forfait dans l'ordre croissant
  
@@ -41,7 +38,6 @@ function getLesIdFraisForfait($pdo)
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
 }
-
 /* gestion des erreurs*/
 /**
  * Renvoie le dernier mois sous la forme 'AAAAMM' des fiches de frais créées pour un visiteur
@@ -58,7 +54,6 @@ function getDernierMois($pdo, $idVisiteur)
 		return $laLigne['dernierMois'];
 
 }
-
 /**
  * Renvoie le mois suivant le mois passé en paramètre sous la forme 'AAAAMM'
  
@@ -80,7 +75,6 @@ function getMoisSuivant($mois){
 			$numMois="0".$numMois;
 		return $numAnnee.$numMois;
 }
-
 /**
  * Renvoie le mois précédent le mois passé en paramètre sous la forme 'AAAAMM'
  
@@ -101,7 +95,6 @@ function getMoisPrecedent($mois){
 			$numMois="0".$numMois;
 		return $numAnnee.$numMois;
 }
-
 /**
  * Génère pour chaque visiteur une fiche de frais du mois actuel, du mois précédent et du mois suivant 
  * avec un état différent en fonction du mois
@@ -151,7 +144,6 @@ function creationFichesFrais($pdo)
 		}
 	}
 }
-
 /**
  * Génère aléatoirement des lignes de frais de forfait pour chaque fiche de frais. 
  * La quantité du frais dépend de l'id :
@@ -186,7 +178,6 @@ function creationFraisForfait($pdo)
 	}
 
 }
-
 /**
  * Retourne un tableau de frais hors forfait qui peuvent être utilisés pour être insérés en base de données
  
@@ -242,7 +233,6 @@ function getDesFraisHorsForfait()
 		);
 	return $tab;
 }
-
 /**
  * Permet de réatribuer un mot de passe composé de 5 caractères (lettres minuscules et chiffres) généré aléatoirement
  * pour chaque visiteur
@@ -269,7 +259,6 @@ function updateMdpVisiteur($pdo)
 			$pdo->exec($req);
 		}
 }
-
 /**
  * Génère des lignes de frais hors forfait aléatoirement pour chaque fiche de frais et à partir d'une liste de
  * frais hors forfait prédéfinie.
@@ -308,7 +297,6 @@ function creationFraisHorsForfait($pdo)
 		}
 	}
 }
-
 /**
  * Retourne une chaîne de caractères correspondant à une année et un mois sous la forme "AAAAMM" créée à partir de la date passée en paramètre.
  * Le jour, le mois et l'année sont décomposés grâce au slash.
@@ -323,7 +311,6 @@ function getMois($date){
 		}
 		return $annee.$mois;
 }
-
 /**
  * Met à jour le montant validé de chaque fiche de frais en additionnant leurs totaux de frais de forfait et de frais hors forfait
  
@@ -361,7 +348,6 @@ function majFicheFrais($pdo)
 		
 	}
 }
-
 /** 
  * Fonctions pour l'application GSB
  
@@ -427,7 +413,6 @@ function estEntierPositif($valeur) {
 	return preg_match("/[^0-9]/", $valeur) == 0;
 	
 }
-
 /**
  * Indique si un tableau de valeurs est constitué d'entiers positifs ou nuls
  
@@ -481,7 +466,6 @@ function estDateValide($date){
     }
 	return $dateOK;
 }
-
 /**
  * Vérifie que le tableau de frais ne contient que des valeurs numériques 
  

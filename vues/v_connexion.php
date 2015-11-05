@@ -5,7 +5,7 @@
 <form method="POST" action="index.php?uc=connexion&action=valideConnexion">
    
         <p>
-            <label for="nom">Login*</label>
+            <label for="login">Login*</label>
             <input id="login" type="text" name="login"  size="30" maxlength="45">
         </p>
         <p>

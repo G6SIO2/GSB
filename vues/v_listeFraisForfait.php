@@ -1,5 +1,6 @@
 <section>
-    <h2>Renseigner ma fiche de frais du mois<?php echo date("F Y ", strtotime($numMois."-".$numAnnee)); ?></h2>
+    <?php setlocale(LC_TIME, 'fr_FR'); ?>
+    <h2>Renseigner ma fiche de frais du mois <?php echo strftime("%B %Y"); ?></h2>
 
     <form method="POST"  action="index.php?uc=gererFrais&action=validerMajFraisForfait">
     <div class="corpsForm">
@@ -17,7 +18,7 @@
               ?>
                   <p>
                       <label for="lesFrais[<?php echo $idFrais?>]"><?php echo $libelle ?></label>
-                      <input type="text" id="lesFrais[<?php echo $idFrais?>]" size="10" maxlength="5" value="<?php echo $quantite?>" >
+                      <input type="text" id="lesFrais[<?php echo $idFrais?>]" name="lesFrais[<?php echo $idFrais?>]" size="10" maxlength="5" value="<?php echo $quantite?>" >
                   </p>
 
               <?php

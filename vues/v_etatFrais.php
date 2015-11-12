@@ -1,5 +1,5 @@
-
-<h3>Fiche de frais du mois <?php echo $numMois."-".$numAnnee?> : 
+<?php setlocale(LC_TIME, 'fr_FR'); ?>
+<h3>Fiche de frais du mois <?php echo strftime("%B %Y", strtotime($numMois."/01/".$numAnnee)); ?> : 
     </h3>
     <div class="encadre">
     <p>

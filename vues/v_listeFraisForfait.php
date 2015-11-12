@@ -1,6 +1,9 @@
 <section>
+    
     <?php setlocale(LC_TIME, 'fr_FR'); ?>
     <h2>Renseigner ma fiche de frais du mois <?php echo strftime("%B %Y"); ?></h2>
+    
+    
 
     <form method="POST"  action="index.php?uc=gererFrais&action=validerMajFraisForfait">
     <div class="corpsForm">
@@ -35,5 +38,6 @@
     </div>
 
     </form>
+    
 </section>
   

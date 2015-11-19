@@ -1,4 +1,7 @@
 <section>
+    
+    <?php setlocale(LC_TIME, 'fr_FR'); ?>
+    <h2>Renseigner ma fiche de frais du mois <?php echo strftime("%B %Y"); ?></h2>
 
     <table class="listeLegere">
         <caption>Descriptif des éléments hors forfait

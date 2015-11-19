@@ -299,10 +299,10 @@ public function creeNouvellesLignesFraisTemporaire($idVisiteur,$description,$dat
  * @param $description
  * @param $quantite
 */
-public function creeNouveauFraisTemporaire($idFrais, $date, $description, $quantite){
+public function creeNouveauFraisTemporaire($idUtilisateur, $mois, $idFrais, $date, $description, $quantite){
     $date = dateFrancaisVersAnglais($date);
     $req = "insert into LigneFraisTemporaires
-    values('', '$date', '$idFrais', '$description', '$quantite')";
+    values('', '$date', '$idFrais', '$description', '$quantite', '$idUtilisateur', '$mois')";
     PdoGsb::$monPdo->exec($req);
 }
 /**

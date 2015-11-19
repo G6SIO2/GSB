@@ -50,7 +50,7 @@ switch($action){
                     include("vues/v_erreurs.php");
 		}
 		else{
-                    $pdo->creeNouveauFraisTemporaire($idFrais, $date, $description, $quantite);
+                    $pdo->creeNouveauFraisTemporaire($idVisiteur, $mois, $idFrais, $date, $description, $quantite);
 		}
 		break;
 	}

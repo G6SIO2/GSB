@@ -79,9 +79,10 @@ ul#menuList{
 
 /* style � appliquer aux �l�ments de la balise ul d'identifiant menulist */
 ul#menuList li {
+    border-bottom: 1px solid #EEE;
     position:relative;
     margin-bottom: 10px;
-    padding:0px;
+    padding: 5px;
 }
 
 /* apparences des liens dans listes et sous-listes non num�rot�es */

@@ -117,7 +117,7 @@ public function getNbjustificatifs($idUtilisateur, $mois){
 */
 public function getLesFraisForfait($idUtilisateur, $mois){
     $req = "select FraisForfait.id as idfrais, FraisForfait.libelle as libelle, 
-    LigneFraisForfait.quantite as quantite from LigneFraisForfait inner join FraisForfait 
+    LigneFraisForfait.quantite as quantite, LigneFraisForfait.montant as montant from LigneFraisForfait inner join FraisForfait 
     on FraisForfait.id = LigneFraisForfait.idfraisforfait
     where LigneFraisForfait.idvisiteur ='$idUtilisateur' and LigneFraisForfait.mois='$mois' 
     order by LigneFraisForfait.idfraisforfait";	

@@ -2,48 +2,101 @@
     
     <?php setlocale(LC_TIME, 'fr_FR'); ?>
     <h2>Renseigner ma fiche de frais du mois <?php echo strftime("%B %Y"); ?></h2>
+    <?php $totalmontant = 0; ?>
     
-    <h3>Saisie d'un nouveau frais forfaitisé:</h3>
+    <h3>Saisie d'un nouveau frais forfaitisé</h3>
 
-<form method="POST" action="index.php?uc=gererFrais&action=validerCreationFraisForfait">
+    <form method="POST" action="index.php?uc=gererFrais&action=validerCreationFraisForfait">
 
+        <table class="table_forfait">
+
+            <tr>
+                        <td>Type de frais:</td>
+                    <td>
+                            <input  type="text" name="dateFrais" maxlength="45">
+                    </td>
+            </tr>
+
+            <tr>
+                        <td>Date de l'engagement de la dépense:</td>
+                    <td>
+                            <input  type="text" name="dateEngag"  maxlength="100">
+                    </td>
+            </tr>
+
+            <tr>
+                        <td>Description:</td>
+                    <td>
+                        <input  type="text" name="description" maxlength="250">
+                    </td>
+            </tr>
+
+             <tr>
+                        <td>Quantité:</td>
+                    <td>
+                        <input  type="text" name="quantite" maxlength="20">
+                    </td>
+            </tr>
+
+        </table>
+
+        <br />
+
+        <input type="submit" value="Valider" name="valider">
+
+    </form>
+    
+    <h3>Eléments forfaitisés (synthèse du mois)</h3>
+    
     <table class="table_forfait">
 
         <tr>
-                    <td>Type de frais:</td>
-                <td>
-                        <input  type="text" name="dateFrais" maxlength="45">
-                </td>
+            <td></td>
+            <?php foreach ($lesFraisForfait as $unFrais) { ?>
+
+                    <td><?php echo $unFrais['libelle']; ?></td>
+
+            <?php } ?>
         </tr>
 
         <tr>
-                    <td>Date de l'engagement de la dépense:</td>
-                <td>
-                        <input  type="text" name="dateEngag"  maxlength="100">
-                </td>
+            <td>Quantité totale</td>
+            <?php foreach ($lesFraisForfait as $unFrais) { ?>
+
+                    <td><?php echo $unFrais['quantite']; ?></td>
+
+            <?php } ?>
         </tr>
 
         <tr>
-                    <td>Description:</td>
-                <td>
-                    <input  type="text" name="description" maxlength="250">
-                </td>
-        </tr>
+            <td>Montant total</td>
+            <?php foreach ($lesFraisForfait as $unFrais) { ?>
 
-         <tr>
-                    <td>Quantité:</td>
-                <td>
-                    <input  type="text" name="quantite" maxlength="20">
-                </td>
+                    <td><?php echo $unFrais['montant']; ?></td>
+                    <?php $totalmontant += $unFrais['montant']; ?>
+
+            <?php } ?>
         </tr>
 
     </table>
     
-    <br />
+    <h3>Total des frais engagés pour le mois : <i><?php echo $totalmontant; ?></i></h3>
     
-    <input type="submit" value="Valider" name="valider">
+    <h3>Eléments forfaitisés (détails duu mois)</h3>
+    
+    <table class="table_forfait">
 
-</form>
+        <tr>
+            <td>Date</td>
+            <td>Type frais</td>
+            <td>Description</td>
+            <td>Quantité</td>
+            <td></td>
+        </tr>
+        
+        <!-- foreach -->
+        
+    </table>
 
 <!--
     <form method="POST"  action="index.php?uc=gererFrais&action=validerMajFraisForfait">

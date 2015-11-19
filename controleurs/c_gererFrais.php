@@ -1,13 +1,24 @@
 <?php
+
+
 include("vues/v_sommaire.php");
 $idVisiteur = $_SESSION['idVisiteur'];
 $mois = getMois(date("d/m/Y"));
 $numAnnee =substr( $mois,0,4);
 $numMois =substr( $mois,4,2);
 $action = $_REQUEST['action'];
+
+$description = $_POST['description'];
+$date = $_POST['date'];
+$quantite = $_POST['quantite'];
+
 switch($action){
 	case 'saisirFraisForfait':{
 		if($pdo->estPremierFraisMois($idVisiteur,$mois)){
+
+			$pdo->creeNouvellesLignesFraisForfait($idVisiteur,$description,$date,$mois,$quantite);
+                        $lesFraisForfait= $pdo->getLesFraisForfait($idVisiteur,$mois);
+                        include("vues/v_listeFraisForfait.php");
 			$pdo->creeNouvellesLignesFrais($idVisiteur,$mois);
 		}
                 $lesFraisForfait= $pdo->getLesFraisForfait($idVisiteur,$mois);
@@ -54,5 +65,4 @@ switch($action){
 		break;
 	}
 }
-
 ?>

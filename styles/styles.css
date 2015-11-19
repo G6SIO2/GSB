@@ -21,9 +21,9 @@ body{
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 }
 header{
-  background-color:rgb(72,198,236);
+        background-color:rgb(72,198,236);
 	color : #980101;
-	border: solid 0.1em #980101;
+	border: solid 0.1em black;
 	height: 154px;
 	padding: 0em;
 	border-collapse: separate;
@@ -41,7 +41,8 @@ header{
 	margin-top : 0.8em;
 	padding: 1em;
 	background-color: white;
-	color: rgb(0,85,227);
+	//color: rgb(0,85,227);
+        color: black;
 	float: left;
 	width: 14%;
 }
@@ -84,14 +85,15 @@ ul#menuList li {
 
 /* apparences des liens dans listes et sous-listes non num�rot�es */
 ul#menuList a {
-    color:rgb(0,85,227);
+    //color:rgb(0,85,227);
+    color: black;
     display:block;
     text-decoration:none;
     width:100%;
 }
 ul#menuList a:hover {
-    background: rgb(0,85,227);
-    color: white;
+    //background: rgb(0,85,227);
+    //color: white;
 }
 
 header #logoGSB {

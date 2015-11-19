@@ -138,6 +138,37 @@ public function getLesFraisForfait($idUtilisateur, $mois){
 }
 
 /**
+ * Retourne sous forme d'un tableau associatif toutes les lignes de frais au forfait
+ * concernées par les deux arguments
+ 
+ * @param $idUtilisateur 
+ * @param $mois sous la forme aaaamm
+ * @return l'id, le libelle et la quantité sous la forme d'un tableau associatif 
+*/
+//public function getLesFraisForfait($idUtilisateur, $mois){
+//    $req = "select FraisForfait.id as idfrais, FraisForfait.libelle as libelle, 
+//    LigneFraisForfait.quantite as quantite from LigneFraisForfait inner join FraisForfait 
+//    on FraisForfait.id = LigneFraisForfait.idfraisforfait
+//    where LigneFraisForfait.idvisiteur ='$idUtilisateur' and LigneFraisForfait.mois='$mois' 
+//    order by LigneFraisForfait.idfraisforfait";	
+//    $res = PdoGsb::$monPdo->query($req);
+//    $lesLignes = $res->fetchAll();
+//    return $lesLignes; 
+//}
+
+public function getLesFraisTemporaires($idUtilisateur, $mois){
+    $req = "SELECT LigneFraisTemporaires.date as date, LigneFraisTemporaires.typeFrais as typeFrais,
+        LigneFraisTemporaires.description as description, LigneFraisTemporaires.quantite as quantite
+    FROM LigneFraisForfait inner join FraisForfait 
+    ON LigneFraisTemporaires.id = LigneFraisForfait.idfraisforfait
+    WHERE LigneFraisForfait.idvisiteur ='$idUtilisateur' and LigneFraisForfait.mois='$mois' 
+    ORDER BY LigneFraisForfait.idfraisforfait";	
+    $res = PdoGsb::$monPdo->query($req);
+    $lesLignes = $res->fetchAll();
+    return $lesLignes; 
+}
+
+/**
  * Retourne tous les id de la table FraisForfait
  
  * @return un tableau associatif 
@@ -234,13 +265,13 @@ public function creeNouvellesLignesFrais($idUtilisateur,$mois){
     $lesIdFrais = $this->getLesIdFrais();
     foreach($lesIdFrais as $uneLigneIdFrais){
         $unIdFrais = $uneLigneIdFrais['idfrais'];
-        $req = "insert into LigneFraisForfait(idvisiteur,mois,idFraisForfait,quantite) 
-        values('$idUtilisateur','$mois','$unIdFrais',0)";
+        $req = "insert into LigneFraisForfait(idvisiteur, mois, idFraisForfait, quantite, montant) 
+        values('$idUtilisateur','$mois','$unIdFrais',0, 0)";
         PdoGsb::$monPdo->exec($req);
     }
 }
 
-public function creeNouvellesLignesFraisForfait($idVisiteur,$description,$date,$mois,$quantite){
+public function creeNouvellesLignesFraisTemporaire($idVisiteur,$description,$date,$mois,$quantite){
     $dernierMois = $this->dernierMoisSaisi($idVisiteur);
     $laDerniereFiche = $this->getLesInfosFicheFrais($idVisiteur,$dernierMois);
     if($laDerniereFiche['idEtat']=='CR'){
@@ -259,6 +290,21 @@ public function creeNouvellesLignesFraisForfait($idVisiteur,$description,$date,$
     }
 }
 
+/**
+ * Crée un nouveau frais forfait temporaire pour un visiteur un mois donné
+ * à partir des informations fournies en paramètre
+ 
+ * @param $idFrais
+ * @param $date : la date du frais au format français jj//mm/aaaa
+ * @param $description
+ * @param $quantite
+*/
+public function creeNouveauFraisTemporaire($idFrais, $date, $description, $quantite){
+    $date = dateFrancaisVersAnglais($date);
+    $req = "insert into LigneFraisTemporaires
+    values('', '$date', '$idFrais', '$description', '$quantite')";
+    PdoGsb::$monPdo->exec($req);
+}
 /**
  * Crée un nouveau frais hors forfait pour un visiteur un mois donné
  * à partir des informations fournies en paramètre

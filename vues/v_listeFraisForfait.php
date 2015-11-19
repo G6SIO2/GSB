@@ -11,31 +11,37 @@
         <table class="table_forfait">
 
             <tr>
-                        <td>Type de frais:</td>
-                    <td>
-                            <input  type="text" name="dateFrais" maxlength="45">
-                    </td>
+                <td>Type de frais</td>
+                <td>
+                    <select name="idfrais">
+                        <?php foreach ($lesFraisForfait as $unFrais) { ?>
+
+                            <option value="<?php echo $unFrais['idfrais']; ?>"><?php echo $unFrais['libelle']; ?></option>
+
+                        <?php } ?>
+                    </select>
+                </td>
             </tr>
 
             <tr>
-                        <td>Date de l'engagement de la dépense:</td>
-                    <td>
-                            <input  type="text" name="dateEngag"  maxlength="100">
-                    </td>
+                <td>Date de l'engagement de la dépense</td>
+                <td>
+                    <input type="date" name="date" placeholder="JJ/MM/AAAA">
+                </td>
             </tr>
 
             <tr>
-                        <td>Description:</td>
-                    <td>
-                        <input  type="text" name="description" maxlength="250">
-                    </td>
+                <td>Description</td>
+                <td>
+                    <input type="text" name="description" maxlength="250">
+                </td>
             </tr>
 
              <tr>
-                        <td>Quantité:</td>
-                    <td>
-                        <input  type="text" name="quantite" maxlength="20">
-                    </td>
+                <td>Quantité</td>
+                <td>
+                    <input type="number" name="quantite" maxlength="20" step="1" min="1" value="1">
+                </td>
             </tr>
 
         </table>
@@ -82,7 +88,7 @@
     
     <h3>Total des frais engagés pour le mois : <i><?php echo $totalmontant; ?></i></h3>
     
-    <h3>Eléments forfaitisés (détails duu mois)</h3>
+    <h3>Eléments forfaitisés (détails du mois)</h3>
     
     <table class="table_forfait">
 

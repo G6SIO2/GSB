@@ -1,6 +1,4 @@
 <?php
-
-
 include("vues/v_sommaire.php");
 $idVisiteur = $_SESSION['idVisiteur'];
 $mois = getMois(date("d/m/Y"));
@@ -8,18 +6,14 @@ $numAnnee =substr( $mois,0,4);
 $numMois =substr( $mois,4,2);
 $action = $_REQUEST['action'];
 
-$description = $_POST['description'];
-$date = $_POST['date'];
-$quantite = $_POST['quantite'];
-
 switch($action){
 	case 'saisirFraisForfait':{
 		if($pdo->estPremierFraisMois($idVisiteur,$mois)){
 
-			$pdo->creeNouvellesLignesFraisForfait($idVisiteur,$description,$date,$mois,$quantite);
-                        $lesFraisForfait= $pdo->getLesFraisForfait($idVisiteur,$mois);
-                        include("vues/v_listeFraisForfait.php");
-			$pdo->creeNouvellesLignesFrais($idVisiteur,$mois);
+                    $pdo->creeNouvellesLignesFraisForfait($idVisiteur,$description);
+                    $lesFraisForfait= $pdo->getLesFraisForfait($idVisiteur,$mois);
+                    include("vues/v_listeFraisForfait.php");
+                    $pdo->creeNouvellesLignesFrais($idVisiteur,$mois);
 		}
                 $lesFraisForfait= $pdo->getLesFraisForfait($idVisiteur,$mois);
                 include("vues/v_listeFraisForfait.php");
@@ -46,7 +40,21 @@ switch($action){
 		}
 	  break;
 	}
-	case 'validerCreationFrais':{
+        case 'validerCreationFraisForfait':{
+		$idFrais = $_REQUEST['idfrais'];
+		$date = $_REQUEST['date'];
+		$description = $_REQUEST['description'];
+		$quantite = $_REQUEST['quantite'];
+		valideInfosFraisForfait($idFrais, $date, $description, $quantite);
+		if (nbErreurs() != 0 ){
+                    include("vues/v_erreurs.php");
+		}
+		else{
+                    $pdo->creeNouveauFraisTemporaire($idFrais, $date, $description, $quantite);
+		}
+		break;
+	}
+	case 'validerCreationFraisHorsForfait':{
 		$dateFrais = $_REQUEST['dateFrais'];
 		$libelle = $_REQUEST['libelle'];
 		$montant = $_REQUEST['montant'];

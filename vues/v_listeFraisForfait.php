@@ -7,43 +7,45 @@
 
 <form method="POST" action="index.php?uc=gererFrais&action=validerCreationFraisForfait">
 
-<table class="tabNonQuadrille">
-        
-    <tr>
-                <td>Type de frais:</td>
-            <td>
-                    <input  type="text" name="dateFrais"  size="30" maxlength="45">
-            </td>
-    </tr>
+    <table class="table_forfait">
 
-    <tr>
-                <td>Date de l'engagement de la dépense:</td>
-            <td>
-                    <input  type="text" name="dateEngag"  size="50" maxlength="100">
-            </td>
-    </tr>
+        <tr>
+                    <td>Type de frais:</td>
+                <td>
+                        <input  type="text" name="dateFrais" maxlength="45">
+                </td>
+        </tr>
 
-    <tr>
-                <td>Description:</td>
-            <td>
-                <input  type="text" name="description" maxlength="250">
-            </td>
-    </tr>
+        <tr>
+                    <td>Date de l'engagement de la dépense:</td>
+                <td>
+                        <input  type="text" name="dateEngag"  maxlength="100">
+                </td>
+        </tr>
+
+        <tr>
+                    <td>Description:</td>
+                <td>
+                    <input  type="text" name="description" maxlength="250">
+                </td>
+        </tr>
+
+         <tr>
+                    <td>Quantité:</td>
+                <td>
+                    <input  type="text" name="quantite" maxlength="20">
+                </td>
+        </tr>
+
+    </table>
     
-     <tr>
-                <td>Quantité:</td>
-            <td>
-                <input  type="text" name="quantite" maxlength="20">
-            </td>
-    </tr>
-
-    <tr>
-
+    <br />
     
-<input type="submit" value="Valider" name="valider">
+    <input type="submit" value="Valider" name="valider">
 
 </form>
 
+<!--
     <form method="POST"  action="index.php?uc=gererFrais&action=validerMajFraisForfait">
     <div class="corpsForm">
 
@@ -77,6 +79,8 @@
     </div>
 
     </form>
+
+-->
     
 </section>
   

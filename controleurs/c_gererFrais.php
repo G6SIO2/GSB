@@ -7,21 +7,21 @@ $numMois =substr( $mois,4,2);
 $action = $_REQUEST['action'];
 switch($action){
 	case 'saisirFraisForfait':{
-            echo $idVisiteur;
-            echo $mois;
 		if($pdo->estPremierFraisMois($idVisiteur,$mois)){
 			$pdo->creeNouvellesLignesFrais($idVisiteur,$mois);
-                        $lesFraisForfait= $pdo->getLesFraisForfait($idVisiteur,$mois);
-                        include("vues/v_listeFraisForfait.php");
 		}
+                $lesFraisForfait= $pdo->getLesFraisForfait($idVisiteur,$mois);
+                include("vues/v_listeFraisForfait.php");
+                
 		break;
 	}
         case 'saisirFraisHorsForfait':{
 		if($pdo->estPremierFraisMois($idVisiteur,$mois)){
 			$pdo->creeNouvellesLignesFrais($idVisiteur,$mois);
-                        $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$mois);
-                        include("vues/v_listeFraisHorsForfait.php");
 		}
+                $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$mois);
+                include("vues/v_listeFraisHorsForfait.php");
+                
 		break;
 	}
 	case 'validerMajFraisForfait':{

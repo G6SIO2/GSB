@@ -51,7 +51,7 @@ section{
 	border: none;
 	padding: 1.3em;
 	background-color: white;
-	border-left :  groove 0.8em #980101;
+	//border-left :  groove 0.8em #980101;
   margin-top : 1.2em;
 	margin-left: 18%;
 /* permet de fixer une hauteur mini sur les navigateurs modernes */
@@ -301,4 +301,14 @@ section img {
   height : 28px;
   float : left;
 
+}
+
+.table_forfait td{
+    padding: 12px;
+    width: 400px;
+    height: auto;
+}
+
+.table_forfait input{
+    width: 300px;
 }

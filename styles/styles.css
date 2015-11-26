@@ -92,10 +92,15 @@ ul#menuList a {
     display:block;
     text-decoration:none;
     width:100%;
+    
+    transition: 0.2s ease;
+    
+    
 }
 ul#menuList a:hover {
     //background: rgb(0,85,227);
-    //color: white;
+    padding-left: 4px;
+    color: #006aeb;
 }
 
 header #logoGSB {

@@ -100,7 +100,23 @@
             <td></td>
         </tr>
         
-        <!-- foreach -->
+        <?php 
+        if(isset($lesFraisTemporaires))
+        {
+            foreach ($lesFraisTemporaires as $unFrais) { 
+                ?>
+        
+                <tr>
+                    <td><?php echo $unFrais['date']; ?></td>
+                    <td><?php echo $unFrais['typefrais']; ?></td>
+                    <td><?php echo $unFrais['description']; ?></td>
+                    <td><?php echo $unFrais['quantite']; ?></td>
+                    <td></td>
+                </tr>
+
+            <?php } 
+        
+        } ?>
         
     </table>
 

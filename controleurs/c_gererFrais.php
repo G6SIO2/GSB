@@ -15,7 +15,8 @@ switch($action){
                     include("vues/v_listeFraisForfait.php");
                     $pdo->creeNouvellesLignesFrais($idVisiteur,$mois);
 		}
-                $lesFraisForfait= $pdo->getLesFraisForfait($idVisiteur,$mois);
+                $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur,$mois);
+                $lesFraisTemporaires = $pdo->getLesFraisTemporaires($idVisiteur, $mois);
                 include("vues/v_listeFraisForfait.php");
                 
 		break;
@@ -51,6 +52,7 @@ switch($action){
 		}
 		else{
                     $pdo->creeNouveauFraisTemporaire($idVisiteur, $mois, $idFrais, $date, $description, $quantite);
+                    $pdo->modifierLigneFraisForfait($idVisiteur, $mois, $idFrais, $quantite);
 		}
 		break;
 	}
@@ -60,16 +62,22 @@ switch($action){
 		$montant = $_REQUEST['montant'];
 		valideInfosFrais($dateFrais,$libelle,$montant);
 		if (nbErreurs() != 0 ){
-			include("vues/v_erreurs.php");
+                    include("vues/v_erreurs.php");
 		}
 		else{
-			$pdo->creeNouveauFraisHorsForfait($idVisiteur,$mois,$libelle,$dateFrais,$montant);
-		}
+                    $pdo->creeNouveauFraisHorsForfait($idVisiteur,$mois,$libelle,$dateFrais,$montant);
+                    echo "bien ajouté";
+                }
 		break;
 	}
 	case 'supprimerFrais':{
 		$idFrais = $_REQUEST['idFrais'];
-	    $pdo->supprimerFraisHorsForfait($idFrais);
+                $pdo->supprimerFraisHorsForfait($idFrais);
+		break;
+	}
+        case 'supprimerFraisTemporaire':{
+		$idFrais = $_REQUEST['idFrais'];
+                $pdo->supprimerFraisTemporaire($idFrais);
 		break;
 	}
 }

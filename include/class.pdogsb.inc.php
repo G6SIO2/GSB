@@ -138,34 +138,46 @@ public function getLesFraisForfait($idUtilisateur, $mois){
 }
 
 /**
- * Retourne sous forme d'un tableau associatif toutes les lignes de frais au forfait
+ * Retourne sous forme d'un tableau associatif toutes les lignes de frais temporaires
  * concernées par les deux arguments
  
  * @param $idUtilisateur 
  * @param $mois sous la forme aaaamm
- * @return l'id, le libelle et la quantité sous la forme d'un tableau associatif 
+ * @return la date, le type de frais, la description et la quantité sous la forme d'un tableau associatif 
 */
-//public function getLesFraisForfait($idUtilisateur, $mois){
-//    $req = "select FraisForfait.id as idfrais, FraisForfait.libelle as libelle, 
-//    LigneFraisForfait.quantite as quantite from LigneFraisForfait inner join FraisForfait 
-//    on FraisForfait.id = LigneFraisForfait.idfraisforfait
-//    where LigneFraisForfait.idvisiteur ='$idUtilisateur' and LigneFraisForfait.mois='$mois' 
-//    order by LigneFraisForfait.idfraisforfait";	
-//    $res = PdoGsb::$monPdo->query($req);
-//    $lesLignes = $res->fetchAll();
-//    return $lesLignes; 
-//}
-
 public function getLesFraisTemporaires($idUtilisateur, $mois){
-    $req = "SELECT LigneFraisTemporaires.date as date, LigneFraisTemporaires.typeFrais as typeFrais,
-        LigneFraisTemporaires.description as description, LigneFraisTemporaires.quantite as quantite
-    FROM LigneFraisForfait inner join FraisForfait 
-    ON LigneFraisTemporaires.id = LigneFraisForfait.idfraisforfait
-    WHERE LigneFraisForfait.idvisiteur ='$idUtilisateur' and LigneFraisForfait.mois='$mois' 
-    ORDER BY LigneFraisForfait.idfraisforfait";	
+    $req = "SELECT LigneFraisTemporaires.id as id, LigneFraisTemporaires.date as date, FraisForfait.libelle as typefrais,
+            LigneFraisTemporaires.description as description, LigneFraisTemporaires.quantite as quantite
+            FROM LigneFraisTemporaires INNER JOIN FraisForfait
+            ON LigneFraisTemporaires.typeFrais = FraisForfait.id
+            WHERE LigneFraisTemporaires.idUtilisateur ='$idUtilisateur' and LigneFraisTemporaires.mois='$mois' 
+            ORDER BY LigneFraisTemporaires.id";	
     $res = PdoGsb::$monPdo->query($req);
     $lesLignes = $res->fetchAll();
     return $lesLignes; 
+}
+
+public function getLigneFraisTemporaires($idFrais){
+    $req = "SELECT LigneFraisTemporaires.id as id, LigneFraisTemporaires.date as date, FraisForfait.libelle as typefrais,
+            FraitForfait.montant as montant,
+            LigneFraisTemporaires.description as description, LigneFraisTemporaires.quantite as quantite
+            FROM LigneFraisTemporaires INNER JOIN FraisForfait
+            ON LigneFraisTemporaires.typeFrais = FraisForfait.id
+            WHERE LigneFraisTemporaires.id ='$idFrais'";	
+    $res = PdoGsb::$monPdo->query($req);
+    $ligne = $res->fetch();
+    return $ligne; 
+}
+
+public function modifierLigneFraisForfait($idUtilisateur, $mois, $idFrais, $quantite)
+{
+    $req = "UPDATE LigneFraisForfait INNER JOIN FraisForfait ON LigneFraisForfait.idFraisForfait = FraisForfait.id
+            SET LigneFraisForfait.quantite = (LigneFraisForfait.quantite + '$quantite'),
+                LigneFraisForfait.montant = (LigneFraisForfait.montant + (FraisForfait.montant * '$quantite') )
+            WHERE LigneFraisForfait.idVisiteur ='$idUtilisateur' AND LigneFraisForfait.mois='$mois'
+            AND LigneFraisForfait.idFraisForfait = '$idFrais' ";
+    
+    PdoGsb::$monPdo->exec($req);
 }
 
 /**
@@ -288,6 +300,16 @@ public function creeNouvellesLignesFraisTemporaire($idVisiteur,$description,$dat
         values('$idVisiteur','$description','$date','$mois','$unIdFrais','$quantite')";
         PdoGsb::$monPdo->exec($req);
     }
+}
+
+public function supprimerFraisTemporaire($idFrais){
+    
+    $ligne = getLigneFraisTemporaires($idFrais);
+    
+    
+    
+    $req = "DELETE FROM LigneFraisTemporaires WHERE LigneFraisTemporaires.id = '$idFrais'";
+    PdoGsb::$monPdo->exec($req);
 }
 
 /**

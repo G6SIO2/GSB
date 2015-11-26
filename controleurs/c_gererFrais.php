@@ -71,7 +71,7 @@ switch($action){
 	}
 	case 'supprimerFrais':{
 		$idFrais = $_REQUEST['idFrais'];
-	    $pdo->supprimerFraisHorsForfait($idFrais);
+                $pdo->supprimerFraisHorsForfait($idFrais);
 		break;
 	}
 }

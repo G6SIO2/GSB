@@ -157,6 +157,17 @@ public function getLesFraisTemporaires($idUtilisateur, $mois){
     return $lesLignes; 
 }
 
+public function modifierLigneFraisForfait($idUtilisateur, $mois, $idFrais, $quantite)
+{
+    $req = "UPDATE LigneFraisForfait INNER JOIN FraisForfait ON LigneFraisForfait.idFraisForfait = FraisForfait.id
+            SET LigneFraisForfait.quantite = (LigneFraisForfait.quantite + '$quantite'),
+                LigneFraisForfait.montant = (LigneFraisForfait.montant + (FraisForfait.montant * '$quantite') )
+            WHERE LigneFraisForfait.idVisiteur ='$idUtilisateur' AND LigneFraisForfait.mois='$mois'
+            AND LigneFraisForfait.idFraisForfait = '$idFrais' ";
+    
+    PdoGsb::$monPdo->exec($req);
+}
+
 /**
  * Retourne tous les id de la table FraisForfait
  

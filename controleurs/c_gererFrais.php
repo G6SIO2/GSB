@@ -66,7 +66,8 @@ switch($action){
 		}
 		else{
                     $pdo->creeNouveauFraisHorsForfait($idVisiteur,$mois,$libelle,$dateFrais,$montant);
-		}
+                    echo "bien ajouté";
+                }
 		break;
 	}
 	case 'supprimerFrais':{

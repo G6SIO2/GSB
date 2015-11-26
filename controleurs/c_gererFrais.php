@@ -49,6 +49,9 @@ switch($action){
 		valideInfosFraisForfait($idFrais, $date, $description, $quantite);
 		if (nbErreurs() != 0 ){
                     include("vues/v_erreurs.php");
+                    $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur,$mois);
+                    $lesFraisTemporaires = $pdo->getLesFraisTemporaires($idVisiteur, $mois);
+                    include("vues/v_listeFraisForfait.php");
 		}
 		else{
                     $pdo->creeNouveauFraisTemporaire($idVisiteur, $mois, $idFrais, $date, $description, $quantite);
@@ -63,6 +66,8 @@ switch($action){
 		valideInfosFrais($dateFrais,$libelle,$montant);
 		if (nbErreurs() != 0 ){
                     include("vues/v_erreurs.php");
+                    $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$mois);
+                    include("vues/v_listeFraisHorsForfait.php");
 		}
 		else{
                     $pdo->creeNouveauFraisHorsForfait($idVisiteur,$mois,$libelle,$dateFrais,$montant);

@@ -49,18 +49,12 @@ header{
 }
 
 section{
-	border: none;
-	padding: 1.3em;
-	background-color: white;
-	//border-left :  groove 0.8em #980101;
-  margin-top : 1.2em;
-	margin-left: 18%;
-/* permet de fixer une hauteur mini sur les navigateurs modernes */
-  min-height:27em;
-/* pour obtenir le m�me effet sur IE, sachant que si le contenu d�passe, il
-"poussera" la hauteur en ne respectant pas la norme. On se joue de ses lacunes
-*/
-  height:27em;
+    border: none;
+    padding: 10px;
+    background-color: white;
+    margin-top: 10px;
+    margin-left: 18%;
+    height: auto;
 }
 
 /* pour r�tablir le mauvais effet sur les nav. modernes */

@@ -5,15 +5,7 @@
     <?php $totalmontant = 0; ?>
     
     <h3>Saisie d'un nouveau frais forfaitisé</h3>
-    <?php 
-    if(isset($_REQUEST['erreurs']))
-    {
-    foreach($_REQUEST['erreurs'] as $erreur)
-	{
-      echo "<li>$erreur</li>";
-	}
-    }
-    ?>
+
     <form method="POST" action="index.php?uc=gererFrais&action=validerCreationFraisForfait">
 
         <table class="table_forfait">

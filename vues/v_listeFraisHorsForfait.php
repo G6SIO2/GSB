@@ -7,7 +7,7 @@
     
     <h3>Saisie d'un nouveau frais hors forfait</h3>
 
-    <form method="POST" action="index.php?uc=gererFrais&action=validerCreationHorsFrais">
+    <form method="POST" action="index.php?uc=gererFrais&action=validerCreationFraisHorsForfait">
 
         <table class="table_forfait">
 

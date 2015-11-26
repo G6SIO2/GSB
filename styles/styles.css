@@ -107,8 +107,6 @@ header #logoGSB {
   float : left;
   width : 238px;
   height : 152px;
-  border-bottom:1px dashed grey;
-  border-right:1px dashed grey; 
 }
 
 header h1 {
@@ -117,7 +115,6 @@ header h1 {
   //margin-left:6em;
   font-size: x-large;
   text-align: center;
-  border-bottom:1px dashed grey;
 }
 
 section pre {

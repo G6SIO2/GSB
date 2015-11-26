@@ -158,11 +158,15 @@ public function getLesFraisTemporaires($idUtilisateur, $mois){
 }
 
 public function getLigneFraisTemporaires($idFrais){
-    $req = "SELECT LigneFraisTemporaires.id as id, LigneFraisTemporaires.date as date, FraisForfait.libelle as typefrais,
-            FraitForfait.montant as montant,
-            LigneFraisTemporaires.description as description, LigneFraisTemporaires.quantite as quantite
-            FROM LigneFraisTemporaires INNER JOIN FraisForfait
-            ON LigneFraisTemporaires.typeFrais = FraisForfait.id
+    $req = "SELECT LigneFraisTemporaires.id as id, 
+            LigneFraisTemporaires.date as date,
+            LigneFraisTemporaires.description as description,
+            LigneFraisTemporaires.quantite as quantite, 
+            LigneFraisTemporaires.typeFrais as typefrais,
+            LigneFraisTemporaires.idUtilisateur as idUtilisateur,
+            LigneFraisTemporaires.mois as mois,
+            FraisForfait.montant as montant
+            FROM LigneFraisTemporaires INNER JOIN FraisForfait ON FraisForfait.id = LigneFraisTemporaires.typeFrais
             WHERE LigneFraisTemporaires.id ='$idFrais'";	
     $res = PdoGsb::$monPdo->query($req);
     $ligne = $res->fetch();
@@ -304,9 +308,14 @@ public function creeNouvellesLignesFraisTemporaire($idVisiteur,$description,$dat
 
 public function supprimerFraisTemporaire($idFrais){
     
-    $ligne = getLigneFraisTemporaires($idFrais);
+    $ligne = $this->getLigneFraisTemporaires($idFrais);
     
-    
+    $req = "UPDATE LigneFraisForfait INNER JOIN FraisForfait ON LigneFraisForfait.idFraisForfait = FraisForfait.id
+            SET LigneFraisForfait.quantite = (LigneFraisForfait.quantite - '".$ligne['quantite']."'),
+                LigneFraisForfait.montant = (LigneFraisForfait.montant - ('".$ligne['montant']."' * '".$ligne['quantite']."') )
+            WHERE LigneFraisForfait.idVisiteur = '".$ligne['idUtilisateur']."' AND LigneFraisForfait.mois = '".$ligne['mois']."' 
+            AND LigneFraisForfait.idFraisForfait = '".$ligne['typefrais']."' ";
+    PdoGsb::$monPdo->exec($req);
     
     $req = "DELETE FROM LigneFraisTemporaires WHERE LigneFraisTemporaires.id = '$idFrais'";
     PdoGsb::$monPdo->exec($req);

@@ -507,6 +507,7 @@ function valideInfosFrais($dateFrais,$libelle,$montant){
 	else
 		if( !is_numeric($montant) ){
 			ajouterErreur("Le champ montant doit être numérique");
+                        setMessage("Retour à 2");
 		}
 }
 /**
@@ -525,6 +526,7 @@ function valideInfosFraisForfait($idFrais, $date, $description, $quantite){
 	else{
 		if(!estDatevalide($date)){
 			ajouterErreur("Date invalide");
+                        setMessage("Retour à 3");
 		}	
 		else{
 			if(estDateDepassee($date)){
@@ -556,6 +558,13 @@ function ajouterErreur($msg){
       $_REQUEST['erreurs']=array();
 	} 
    $_REQUEST['erreurs'][]=$msg;
+}
+
+function setMessage($msg){
+   if (! isset($_REQUEST['message'])){
+      $_REQUEST['message']=array();
+	} 
+   $_REQUEST['message'][]=$msg;
 }
 /**
  * Retoune le nombre de lignes du tableau des erreurs 

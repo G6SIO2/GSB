@@ -216,12 +216,15 @@ section .corpsTexte {
 section a {
    font-size : 1.1em;
    color:gray;
-   text-decoration:none;
+   text-decoration: none;
+   
+   transition: 0.2s ease;
 }
 section a:hover {
-   text-decoration:underline;
-   background-color : #D9BB7A;
-   font-size : 1em;
+   text-decoration: none;
+   color: #006aeb;
+   //background-color : #D9BB7A;
+   //font-size : 1em;
 }
 
 /* Style pour les parties importantes de la page principale */

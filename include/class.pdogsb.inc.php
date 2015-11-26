@@ -146,7 +146,7 @@ public function getLesFraisForfait($idUtilisateur, $mois){
  * @return la date, le type de frais, la description et la quantité sous la forme d'un tableau associatif 
 */
 public function getLesFraisTemporaires($idUtilisateur, $mois){
-    $req = "SELECT LigneFraisTemporaires.date as date, FraisForfait.libelle as typefrais,
+    $req = "SELECT LigneFraisTemporaires.id as id, LigneFraisTemporaires.date as date, FraisForfait.libelle as typefrais,
             LigneFraisTemporaires.description as description, LigneFraisTemporaires.quantite as quantite
             FROM LigneFraisTemporaires INNER JOIN FraisForfait
             ON LigneFraisTemporaires.typeFrais = FraisForfait.id
@@ -155,6 +155,18 @@ public function getLesFraisTemporaires($idUtilisateur, $mois){
     $res = PdoGsb::$monPdo->query($req);
     $lesLignes = $res->fetchAll();
     return $lesLignes; 
+}
+
+public function getLigneFraisTemporaires($idFrais){
+    $req = "SELECT LigneFraisTemporaires.id as id, LigneFraisTemporaires.date as date, FraisForfait.libelle as typefrais,
+            FraitForfait.montant as montant,
+            LigneFraisTemporaires.description as description, LigneFraisTemporaires.quantite as quantite
+            FROM LigneFraisTemporaires INNER JOIN FraisForfait
+            ON LigneFraisTemporaires.typeFrais = FraisForfait.id
+            WHERE LigneFraisTemporaires.id ='$idFrais'";	
+    $res = PdoGsb::$monPdo->query($req);
+    $ligne = $res->fetch();
+    return $ligne; 
 }
 
 public function modifierLigneFraisForfait($idUtilisateur, $mois, $idFrais, $quantite)
@@ -288,6 +300,16 @@ public function creeNouvellesLignesFraisTemporaire($idVisiteur,$description,$dat
         values('$idVisiteur','$description','$date','$mois','$unIdFrais','$quantite')";
         PdoGsb::$monPdo->exec($req);
     }
+}
+
+public function supprimerFraisTemporaire($idFrais){
+    
+    $ligne = getLigneFraisTemporaires($idFrais);
+    
+    
+    
+    $req = "DELETE FROM LigneFraisTemporaires WHERE LigneFraisTemporaires.id = '$idFrais'";
+    PdoGsb::$monPdo->exec($req);
 }
 
 /**

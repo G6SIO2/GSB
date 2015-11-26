@@ -74,5 +74,10 @@ switch($action){
                 $pdo->supprimerFraisHorsForfait($idFrais);
 		break;
 	}
+        case 'supprimerFraisTemporaire':{
+		$idFrais = $_REQUEST['idFrais'];
+                $pdo->supprimerFraisTemporaire($idFrais);
+		break;
+	}
 }
 ?>

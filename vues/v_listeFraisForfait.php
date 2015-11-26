@@ -111,7 +111,8 @@
                     <td><?php echo $unFrais['typefrais']; ?></td>
                     <td><?php echo $unFrais['description']; ?></td>
                     <td><?php echo $unFrais['quantite']; ?></td>
-                    <td></td>
+                    <td><a href="index.php?uc=gererFrais&action=supprimerFraisTemporaire&idFrais=<?php echo $unFrais['id'] ?>" 
+                        onclick="return confirm('Voulez-vous vraiment supprimer ce frais ?');">Supprimer ce frais</a></td>
                 </tr>
 
             <?php } 

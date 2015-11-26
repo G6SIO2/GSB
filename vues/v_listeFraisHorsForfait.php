@@ -1,5 +1,46 @@
 <section>
     
+    
+    <?php setlocale(LC_TIME, 'fr_FR'); ?>
+    <h2>Renseigner ma fiche de frais du mois <?php echo strftime("%B %Y"); ?></h2>
+    <?php $totalmontant = 0; ?>
+    
+    <h3>Saisie d'un nouveau frais hors forfait</h3>
+
+    <form method="POST" action="index.php?uc=gererFrais&action=validerCreationHorsFrais">
+
+        <table class="table_forfait">
+
+            <tr>
+                <td>Date de l'engagement de la dépense</td>
+                <td>
+                    <input type="text" id="txtDateHF" name="dateFrais" size="10" maxlength="10" value=""  />
+                </td>
+            </tr>
+
+            <tr>
+                <td>Libelle</td>
+                <td>
+                   <input type="text" id="txtLibelleHF" name="libelle" size="70" maxlength="256" value="" />
+                </td>
+            </tr>
+
+             <tr>
+                <td>Montant</td>
+                <td>
+                      <input type="text" id="txtMontantHF" name="montant" size="10" maxlength="10" value="" />
+                </td>
+            </tr>
+
+        </table>
+
+        <br />
+
+        <input id="ajouter" type="submit" value="Ajouter" size="20" />
+            <input id="effacer" type="reset" value="Effacer" size="20" />
+
+    </form><!--
+    
     <form action="index.php?uc=gererFrais&action=validerCreationFrais" method="post">
         <div class="corpsForm">
 
@@ -27,7 +68,7 @@
         </p> 
         </div>
 
-    </form>
+    </form>-->
 
     <table class="listeLegere">
         <caption>Descriptif des éléments hors forfait

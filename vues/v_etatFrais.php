@@ -3,11 +3,22 @@
     <?php setlocale(LC_TIME, 'fr_FR'); ?>
     <h3>Fiche de frais du mois <?php echo utf8_encode(strftime("%B %Y", strtotime($numMois."/01/".$numAnnee))); ?> : </h3>
     
+    <a href="vues/v_pdf.php"><button type="button">PDF</button></a>
+    
+    <?php    
+//        include_once 'html2pdf/html2pdf.class.php';
+//
+//        $pdf = new HTML2PDF('P', 'A4', 'fr', 'true', 'UTF-8');
+//        $pdf->writeHTML($output);
+//        ob_end_clean();
+//        $pdf->Output('liste.pdf');
+    ?>
+    
     <p>
         Etat : <?php echo $libEtat?> depuis le <?php echo $dateModif?> <br> Montant validé : <?php echo $montantValide?>
     </p>
 
-    <table class="table">
+    <table class="table" id="table_forfaitises">
         <caption>Eléments forfaitisés </caption>
         
         <tbody>
@@ -79,6 +90,17 @@
     </table>
     
 </section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script type="text/javascript">
+    
+    function tableEnHTML()
+    {
+        return $('#table_forfaitises').html();
+    }
+    
+</script>
  
 
 

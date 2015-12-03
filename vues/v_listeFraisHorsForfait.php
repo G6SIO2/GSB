@@ -2,7 +2,7 @@
     
     
     <?php setlocale(LC_TIME, 'fr_FR'); ?>
-    <h2>Renseigner ma fiche de frais du mois <?php echo strftime("%B %Y"); ?></h2>
+    <h2>Renseigner ma fiche de frais du mois <?php echo utf8_encode(strftime("%B %Y")); ?></h2>
     <?php $totalmontant = 0; ?>
     
     <h3>Saisie d'un nouveau frais hors forfait</h3>
@@ -14,7 +14,7 @@
             <tr>
                 <td>Date de l'engagement de la dépense</td>
                 <td>
-                    <input type="text" id="txtDateHF" name="dateFrais" size="10" maxlength="10" value=""  />
+                    <input type="text" id="txtDateHF" name="dateFrais" size="10" maxlength="10" value="" placeholder="JJ/MM/AAAA"/>
                 </td>
             </tr>
 
@@ -28,7 +28,7 @@
              <tr>
                 <td>Montant</td>
                 <td>
-                      <input type="text" id="txtMontantHF" name="montant" size="10" maxlength="10" value="" />
+                      <input type="number" id="txtMontantHF" name="montant" size="10" maxlength="10" value="" step="0.01" min="0.01"/>
                 </td>
             </tr>
 

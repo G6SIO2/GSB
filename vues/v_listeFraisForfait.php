@@ -1,7 +1,7 @@
 <section>
     
     <?php setlocale(LC_TIME, 'fr_FR'); ?>
-    <h2>Renseigner ma fiche de frais du mois <?php echo strftime("%B %Y"); ?></h2>
+    <h2>Renseigner ma fiche de frais du mois <?php echo utf8_encode(strftime("%B %Y")); ?></h2>
     <?php $totalmontant = 0; ?>
     
     <h3>Saisie d'un nouveau frais forfaitisé</h3>

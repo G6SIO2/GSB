@@ -10,7 +10,7 @@ switch($action){
 	case 'saisirFraisForfait':{
 		if($pdo->estPremierFraisMois($idVisiteur,$mois)){
 
-                    $pdo->creeNouvellesLignesFraisForfait($idVisiteur,$description);
+                    $pdo->creeNouvellesLignesFrais($idVisiteur,$mois);
                     $lesFraisForfait= $pdo->getLesFraisForfait($idVisiteur,$mois);
                     include("vues/v_listeFraisForfait.php");
                     $pdo->creeNouvellesLignesFrais($idVisiteur,$mois);
@@ -33,11 +33,11 @@ switch($action){
 	case 'validerMajFraisForfait':{
 		$lesFrais = $_REQUEST['lesFrais'];
 		if(lesQteFraisValides($lesFrais)){
-	  	 	$pdo->majFraisForfait($idVisiteur,$mois,$lesFrais);
+                    $pdo->majFraisForfait($idVisiteur,$mois,$lesFrais);
 		}
 		else{
-			ajouterErreur("Les valeurs des frais doivent être numériques");
-			include("vues/v_erreurs.php");
+                    ajouterErreur("Les valeurs des frais doivent être numériques");
+                    include("vues/v_erreurs.php");
 		}
 	  break;
 	}
@@ -56,6 +56,13 @@ switch($action){
 		else{
                     $pdo->creeNouveauFraisTemporaire($idVisiteur, $mois, $idFrais, $date, $description, $quantite);
                     $pdo->modifierLigneFraisForfait($idVisiteur, $mois, $idFrais, $quantite);
+                    
+                    $confirmation = "ajout";
+                    include("vues/v_confirmation.php");
+                    
+                    $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur,$mois);
+                    $lesFraisTemporaires = $pdo->getLesFraisTemporaires($idVisiteur, $mois);
+                    include("vues/v_listeFraisForfait.php");
 		}
 		break;
 	}
@@ -71,18 +78,31 @@ switch($action){
 		}
 		else{
                     $pdo->creeNouveauFraisHorsForfait($idVisiteur,$mois,$libelle,$dateFrais,$montant);
-                    echo "bien ajouté";
+                    
+                    $confirmation = "ajout";
+                    include("vues/v_confirmation.php");
+                    
+                    $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$mois);
+                    include("vues/v_listeFraisHorsForfait.php");
                 }
 		break;
 	}
 	case 'supprimerFrais':{
 		$idFrais = $_REQUEST['idFrais'];
                 $pdo->supprimerFraisHorsForfait($idFrais);
+                
+                $confirmation = "suppression";
+                include("vues/v_confirmation.php");
+                
 		break;
 	}
         case 'supprimerFraisTemporaire':{
 		$idFrais = $_REQUEST['idFrais'];
                 $pdo->supprimerFraisTemporaire($idFrais);
+                
+                $confirmation = "suppression";
+                include("vues/v_confirmation.php");
+                
 		break;
 	}
 }

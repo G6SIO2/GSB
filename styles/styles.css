@@ -12,7 +12,8 @@ body{
 #page {
     background-color:white;
     width : 65%;
-    margin : auto ;
+    margin : auto;
+    min-height: 600px;
     //border : 0.2em solid black;
     //padding : 0.1em;
     
@@ -39,13 +40,13 @@ header{
 	border-collapse: separate;
 }
 #menuGauche {
-	margin-top : 0.8em;
-	padding: 1em;
-	background-color: white;
-	//color: rgb(0,85,227);
-        color: black;
-	float: left;
-	width: 14%;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: white;
+    color: black;
+    float: left;
+    width: 14%;
+    //display: inline-block;
 }
 
 section{
@@ -177,8 +178,8 @@ button{
 /*  Le texte des messages d'erreur est de couleur rose sur fond ocre et de 
 taille de caract�res l�g�rement sup�rieure � la normale */
 .erreur{ 
-   background-color:rgb(237,210,229);
-   color:rgb(203,28,128);
+   background-color: bisque;
+   color: red;
    font-size:1.1em;
    width:95%;
 }
@@ -312,4 +313,16 @@ section img {
 
 .table_forfait input{
     width: 300px;
+}
+
+.confirmation_vert{
+    padding: 10px;
+    border: 1px solid #42d611;
+    background-color: #ddffb7;
+}
+
+.confirmation_rouge{
+    padding: 10px;
+    border: 1px solid #ff2810;
+    background-color: #ffafa1;
 }

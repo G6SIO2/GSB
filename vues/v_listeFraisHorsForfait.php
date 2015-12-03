@@ -14,7 +14,7 @@
             <tr>
                 <td>Date de l'engagement de la dépense</td>
                 <td>
-                    <input type="date" id="txtDateHF" name="dateFrais"/>
+                    <input type="date" id="txtDateHF" name="dateFrais" placeholder="JJ/MM/AAAA"/>
                 </td>
             </tr>
 

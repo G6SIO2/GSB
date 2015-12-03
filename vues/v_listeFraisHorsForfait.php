@@ -14,7 +14,7 @@
             <tr>
                 <td>Date de l'engagement de la dépense</td>
                 <td>
-                    <input type="text" id="txtDateHF" name="dateFrais" size="10" maxlength="10" value="" placeholder="JJ/MM/AAAA"/>
+                    <input type="date" id="txtDateHF" name="dateFrais"/>
                 </td>
             </tr>
 
@@ -70,9 +70,12 @@
 
     </form>-->
 
-    <table class="listeLegere">
+    <table class="table_forfait">
         <caption>Descriptif des éléments hors forfait
         </caption>
+        
+        <tbody>
+            
         <tr>
            <th class="date">Date</th>
                            <th class="libelle">Libellé</th>  
@@ -98,7 +101,9 @@
             <?php		 
 
             }
-        ?>	  
+        ?>
+                 
+        </tbody>
 
     </table>
 

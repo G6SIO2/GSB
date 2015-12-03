@@ -278,6 +278,9 @@ public function creeNouvellesLignesFrais($idUtilisateur,$mois){
     $req = "insert into FicheFrais(idvisiteur,mois,nbJustificatifs,montantValide,dateModif,idEtat) 
     values('$idUtilisateur','$mois',0,0,now(),'CR')";
     PdoGsb::$monPdo->exec($req);
+    $req = "DELETE FROM LigneFraisTemporaires WHERE LigneFraisTemporaires.idUtilisateur = '".$idUtilisateur."'
+            AND LigneFraisTemporaires.mois <= ".$dernierMois."";
+    PdoGsb::$monPdo->exec($req);
     $lesIdFrais = $this->getLesIdFrais();
     foreach($lesIdFrais as $uneLigneIdFrais){
         $unIdFrais = $uneLigneIdFrais['idfrais'];

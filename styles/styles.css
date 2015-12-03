@@ -235,6 +235,7 @@ section table {
 }
 
 /* Style pour les lignes d'en-t�te des tableaux */
+/*
 section th {  
    background-color:#77AADD;
    height:21px;
@@ -244,6 +245,7 @@ section th {
    border-bottom:0.1em solid #777777;
    font-size:1.1em;
 } 
+*/
 
 section td {
    border :1px solid #777777;
@@ -305,6 +307,10 @@ section img {
 
 }
 
+.table_forfait{
+    width: 100%;
+}
+
 .table_forfait td{
     padding: 12px;
     width: 400px;
@@ -312,6 +318,20 @@ section img {
 }
 
 .table_forfait input{
+    width: 300px;
+}
+
+.table{
+    width: 100%;
+}
+
+.table td{
+    padding: 12px;
+    width: 400px;
+    height: auto;
+}
+
+.table input{
     width: 300px;
 }
 

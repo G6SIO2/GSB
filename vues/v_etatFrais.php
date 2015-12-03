@@ -7,36 +7,54 @@
         Etat : <?php echo $libEtat?> depuis le <?php echo $dateModif?> <br> Montant validé : <?php echo $montantValide?>
     </p>
 
-    <table class="listeLegere">
+    <table class="table">
         <caption>Eléments forfaitisés </caption>
         
-        <tr>
-         <?php
-         foreach ( $lesFraisForfait as $unFraisForfait ) 
-            {
-                $libelle = $unFraisForfait['libelle'];
-            ?>	
-            <th> <?php echo $libelle?></th>
+        <tbody>
+            
+            <tr>
              <?php
-                }
-            ?>
-        </tr>
-        
-        <tr>
-            <?php
-            foreach (  $lesFraisForfait as $unFraisForfait  ) 
+             foreach ( $lesFraisForfait as $unFraisForfait ) 
                 {
-                    $quantite = $unFraisForfait['quantite'];
+                    $libelle = $unFraisForfait['libelle'];
+                ?>	
+                <th> <?php echo $libelle?></th>
+                 <?php
+                    }
                 ?>
-            <td class="qteForfait"><?php echo $quantite?> </td>
-            <?php
-                }
-            ?>
-        </tr>
+            </tr>
+
+            <tr>
+                <?php
+                foreach (  $lesFraisForfait as $unFraisForfait  ) 
+                    {
+                        $quantite = $unFraisForfait['quantite'];
+                    ?>
+                <td><?php echo $quantite ?> </td>
+                <?php
+                    }
+                ?>
+            </tr>
+            
+            <tr>
+                <?php
+                foreach (  $lesFraisForfait as $unFraisForfait  ) 
+                    {
+                        $montant = $unFraisForfait['montant'];
+                    ?>
+                <td><?php echo $montant ?> </td>
+                <?php
+                    }
+                ?>
+            </tr>
+        
+        <tbody>
         
     </table>
+    
+    <br />
 
-    <table class="listeLegere">
+    <table class="table">
         <caption>Descriptif des éléments hors forfait -<?php echo $nbJustificatifs ?> justificatifs reçus - </caption>
         <tr>
             <th class="date">Date</th>

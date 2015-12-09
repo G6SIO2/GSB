@@ -1,24 +1,22 @@
 <section>
 
     <?php setlocale(LC_TIME, 'fr_FR'); ?>
-    <h3>Fiche de frais du mois <?php echo utf8_encode(strftime("%B %Y", strtotime($numMois."/01/".$numAnnee))); ?> : </h3>
+    <h3>Fiche de frais du mois <?php $ladate = utf8_encode(strftime("%B %Y", strtotime($numMois."/01/".$numAnnee))); echo $ladate; ?> : </h3>
     
-    <a href="vues/v_pdf.php"><button type="button">PDF</button></a>
+    <form action="controleurs/c_pdf.php" method="POST">
+        
+        <input name="ladate" type="text" style="visibility: hidden; display: none;" value="<?php echo $ladate ?>">
+        <input name="nomprenom" type="text" style="visibility: hidden; display: none;" value="<?php echo $_SESSION['prenom']."  ".$_SESSION['nom'];  ?>">
     
-    <?php    
-//        include_once 'html2pdf/html2pdf.class.php';
-//
-//        $pdf = new HTML2PDF('P', 'A4', 'fr', 'true', 'UTF-8');
-//        $pdf->writeHTML($output);
-//        ob_end_clean();
-//        $pdf->Output('liste.pdf');
-    ?>
+        <button type="submit" id="btn_pdf">PDF</button>
+    
+    </form>
     
     <p>
         Etat : <?php echo $libEtat?> depuis le <?php echo $dateModif?> <br> Montant validé : <?php echo $montantValide?>
     </p>
 
-    <table class="table" id="table_forfaitises">
+    <table class="table" id="table_forfaitises" id="table_1">
         <caption>Eléments forfaitisés </caption>
         
         <tbody>
@@ -65,7 +63,7 @@
     
     <br />
 
-    <table class="table">
+    <table class="table" id="table_2">
         <caption>Descriptif des éléments hors forfait -<?php echo $nbJustificatifs ?> justificatifs reçus - </caption>
         <tr>
             <th class="date">Date</th>
@@ -88,30 +86,15 @@
           }
         ?>
     </table>
+         
+    <?php    
+//        include_once 'html2pdf/html2pdf.class.php';
+//
+//        $pdf = new HTML2PDF('P', 'A4', 'fr', 'true', 'UTF-8');
+//        $contenu = ob_get_contents();
+//        $pdf->writeHTML($contenu);
+//        ob_end_clean();
+//        $pdf->Output('liste.pdf');
+    ?>
     
 </section>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-<script type="text/javascript">
-    
-    function tableEnHTML()
-    {
-        return $('#table_forfaitises').html();
-    }
-    
-</script>
- 
-
-
-
-
-
-
-
-
-
-
-
-
-

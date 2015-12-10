@@ -1,8 +1,19 @@
 <?php
-
     include_once '../html2pdf/html2pdf.class.php';
-  
-   ob_start();
+    
+    require_once("../include/fct.inc.php");
+    require_once ("../include/class.pdogsb.inc.php");
+    
+    session_start();
+    $pdo = PdoGsb::getPdoGsb();
+    
+    $idVisiteur = $_SESSION['idVisiteur'];
+    $mois = getMois(date("d/m/Y"));
+    $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur,$mois);
+    $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$mois);
+    
+    ob_end_clean();
+    ob_start();
    
     ?>
 <style type="text/css">
@@ -10,14 +21,17 @@
     {
         text-align:center;
     }
-    table, td
+    table
     {
-        border: 2px outset gray;
+        border: 1px solid grey;
+    }
+    td
+    {
+        border-bottom: 1px solid #EEE;
     }
     .ElmtForfait
     {
-        width: 19%; 
-        color:blue;
+        width: 25%; 
     }
     
     .BlocH4
@@ -39,27 +53,49 @@
     
     <p style="margin-top: 50px; text-align:right;">
         Employé concerné : <?php echo $_POST['nomprenom'];  ?> <br>
-        Etat de la fiche : <span>Fiche crée, saisie en cours depuis le XX/XX/XXX</span><br>
-        Montant validée : X.XX
+        Etat de la fiche : <span><?php echo $_POST['libetat'];  ?> depuis le <?php echo $_POST['datemodif'];  ?></span><br>
+        Montant validée : <?php echo $_POST['montantvalide'];  ?> €
     </p>
     
     <br>
     <p style="text-align:left; font-weight:bold;">Eléments forfaitisés :</p>
     
-    <table style="width: 100%; width:70%;">
+    <table style="width: 100%;">
         
         <tr>
-            <td class="ElmtForfait" >Forfait Etape</td>
-            <td class="ElmtForfait" >Frais Kilométrique</td>
-            <td class="ElmtForfait" >Nuitée Hotel</td>
-            <td class="ElmtForfait" >Repas Restaurant</td>            
+            <?php
+                foreach ( $lesFraisForfait as $unFraisForfait ) 
+                {
+                   $libelle = $unFraisForfait['libelle'];
+                ?>	
+                    <td class="ElmtForfait"><?php echo $libelle?></td>
+            <?php
+                }
+            ?>
         </tr>
         
         <tr>
-            <td style="width: 19%;">XX</td>
-            <td style="width: 19%;">XX</td>
-            <td style="width: 19%;">XX</td>
-            <td style="width: 19%;">XX</td>            
+            <?php
+                foreach ( $lesFraisForfait as $unFraisForfait ) 
+                {
+                    $quantite = $unFraisForfait['quantite'];
+                ?>	
+                    <td class="ElmtForfait"><?php echo $quantite; ?></td>
+            <?php
+                }
+            ?>
+        </tr>
+        
+        <tr>
+            <?php
+                foreach ( $lesFraisForfait as $unFraisForfait ) 
+                {
+                    $montant = $unFraisForfait['montant'];
+                ?>	
+                    <td class="ElmtForfait"><?php echo $montant; ?> €</td>
+            <?php
+                }
+            ?>
         </tr>
         
     </table>
@@ -70,27 +106,40 @@
     <table style="width: 100%;">
         
         <tr>
-            <td style="width: 15%; color:blue;">Date</td>
-            <td style="width: 40%; color:blue;">Libellé</td>
-            <td style="width: 15%; color:blue;">Montant</td>           
+            <td style="width: 30%;">Date</td>
+            <td style="width: 40%;">Libellé</td>
+            <td style="width: 30%;">Montant</td>           
         </tr>
         
         <tr>
-            <td style="width: 15%;">XX</td>
-            <td style="width: 40%;">XX</td>
-            <td style="width: 15%;">XX</td>            
+            <?php      
+            foreach ( $lesFraisHorsForfait as $unFraisHorsForfait ) 
+                {
+                    $date = $unFraisHorsForfait['date'];
+                    $libelle = $unFraisHorsForfait['libelle'];
+                    $montant = $unFraisHorsForfait['montant'];
+                ?>
+                <tr>
+                    <td style="width: 30%;"><?php echo $date ?></td>
+                    <td style="width: 40%;"><?php echo $libelle ?></td>
+                    <td style="width: 30%;"><?php echo $montant ?> €</td>
+                </tr>
+        <?php 
+          }
+        ?>     
         </tr>
         
     </table>
   
 </page>
-    <?php
+<?php
+
     $contenu =  ob_get_contents();
-    ob_end_clean();
     
     $pdf = new HTML2PDF('P', 'A4', 'fr', 'true', 'UTF-8');
     $pdf->writeHTML($contenu);
     
+    ob_end_clean();
     $pdf->Output('fichefrais.pdf');
 
 ?>

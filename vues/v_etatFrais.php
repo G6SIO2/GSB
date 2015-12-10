@@ -7,7 +7,10 @@
         
         <input name="ladate" type="text" style="visibility: hidden; display: none;" value="<?php echo $ladate ?>">
         <input name="nomprenom" type="text" style="visibility: hidden; display: none;" value="<?php echo $_SESSION['prenom']."  ".$_SESSION['nom'];  ?>">
-    
+        <input name="libetat" type="text" style="visibility: hidden; display: none;" value="<?php echo $libEtat ?>">
+        <input name="datemodif" type="text" style="visibility: hidden; display: none;" value="<?php echo $dateModif ?>">
+        <input name="montantvalide" type="text" style="visibility: hidden; display: none;" value="<?php echo $montantValide ?>">
+        
         <button type="submit" id="btn_pdf">PDF</button>
     
     </form>
@@ -22,15 +25,15 @@
         <tbody>
             
             <tr>
-             <?php
-             foreach ( $lesFraisForfait as $unFraisForfait ) 
-                {
-                    $libelle = $unFraisForfait['libelle'];
-                ?>	
-                <th> <?php echo $libelle?></th>
-                 <?php
-                    }
-                ?>
+                <?php
+                foreach ( $lesFraisForfait as $unFraisForfait ) 
+                   {
+                       $libelle = $unFraisForfait['libelle'];
+                   ?>	
+                   <th> <?php echo $libelle?></th>
+                    <?php
+                       }
+                   ?>
             </tr>
 
             <tr>
@@ -86,15 +89,5 @@
           }
         ?>
     </table>
-         
-    <?php    
-//        include_once 'html2pdf/html2pdf.class.php';
-//
-//        $pdf = new HTML2PDF('P', 'A4', 'fr', 'true', 'UTF-8');
-//        $contenu = ob_get_contents();
-//        $pdf->writeHTML($contenu);
-//        ob_end_clean();
-//        $pdf->Output('liste.pdf');
-    ?>
     
 </section>

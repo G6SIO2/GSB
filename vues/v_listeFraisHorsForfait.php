@@ -28,7 +28,7 @@
              <tr>
                 <td>Montant</td>
                 <td>
-                      <input type="number" id="txtMontantHF" name="montant" size="10" maxlength="10" value="" step="0.01" min="0.01"/>
+                      <input type="number" id="txtMontantHF" name="montant" size="10" value="" step="0.01" min="0.01"/>
                 </td>
             </tr>
 

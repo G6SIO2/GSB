@@ -10,8 +10,11 @@
         <input name="libetat" type="text" style="visibility: hidden; display: none;" value="<?php echo $libEtat ?>">
         <input name="datemodif" type="text" style="visibility: hidden; display: none;" value="<?php echo $dateModif ?>">
         <input name="montantvalide" type="text" style="visibility: hidden; display: none;" value="<?php echo $montantValide ?>">
+        <input name="lemois" type="text" style="visibility: hidden; display: none;" value="<?php echo $leMois ?>">  
         
-        <button type="submit" id="btn_pdf">PDF</button>
+        <?php if($leMois != getMois(date('d/m/Y'))) { ?>
+            <button type="submit" id="btn_pdf">PDF</button>
+        <?php } ?>
     
     </form>
     

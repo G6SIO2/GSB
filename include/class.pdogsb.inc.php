@@ -16,7 +16,7 @@
  */
 class PdoGsb{   		
 private static $serveur='mysql:host=localhost';
-private static $bdd='dbname=gsbV2';   		
+private static $bdd='dbname=gsbV3';   		
 private static $user='root' ;    		
 private static $mdp='mysql' ;	
 private static $monPdo;
@@ -336,7 +336,7 @@ public function supprimerFraisTemporaire($idFrais){
 public function creeNouveauFraisTemporaire($idUtilisateur, $mois, $idFrais, $date, $description, $quantite){
     $date = dateFrancaisVersAnglais($date);
     $req = "insert into LigneFraisTemporaires
-    values('', '$date', '$idFrais', '$description', '$quantite', '$idUtilisateur', '$mois')";
+    values('', '$date', '$idFrais', '".addslashes($description)."', '$quantite', '$idUtilisateur', '$mois')";
     PdoGsb::$monPdo->exec($req);
 }
 /**
@@ -352,7 +352,7 @@ public function creeNouveauFraisTemporaire($idUtilisateur, $mois, $idFrais, $dat
 public function creeNouveauFraisHorsForfait($idUtilisateur,$mois,$libelle,$date,$montant){
     $dateFr = dateFrancaisVersAnglais($date);
     $req = "insert into LigneFraisHorsForfait 
-    values('','$idUtilisateur','$mois','$libelle','$dateFr','$montant')";
+    values('','$idUtilisateur','$mois','".addslashes($libelle)."','$dateFr','$montant')";
     PdoGsb::$monPdo->exec($req);
 }
 /**

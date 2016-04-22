@@ -68,7 +68,6 @@ switch($action){
 	}
 	case 'validerCreationFraisHorsForfait':{
 		$dateFrais = $_REQUEST['dateFrais'];
-                $dateFrais = date("d/m/Y", strtotime($dateFrais));
 		$libelle = $_REQUEST['libelle'];
 		$montant = $_REQUEST['montant'];
 		valideInfosFrais($dateFrais,$libelle,$montant);

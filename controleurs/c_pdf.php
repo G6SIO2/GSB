@@ -8,9 +8,9 @@
     $pdo = PdoGsb::getPdoGsb();
     
     $idVisiteur = $_SESSION['idVisiteur'];
-    $mois = getMois(date("d/m/Y"));
-    $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur,$mois);
-    $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$mois);
+    $leMois = $_POST['lemois'];
+    $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur,$leMois);
+    $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$leMois);
     
     ob_end_clean();
     ob_start();
